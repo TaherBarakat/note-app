@@ -1,15 +1,24 @@
+import { FormEvent, useRef } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-export default function NoteForm() {
+export default function NoteForm({ onSubmit }) {
+     const titleRef = useRef<HTMLInputElement>(null);
+     const markdownRef = useRef<HTMLTextAreaElement>(null);
+     function handleSubmit(e: FormEvent) {
+          e.preventDefault();
+     }
      return (
-          <Form>
+          <Form onSubmit={handleSubmit}>
                <Stack>
                     <Row>
                          <Col>
                               <Form.Group controlId="title">
                                    <Form.Label>Title</Form.Label>
-                                   <Form.Control required></Form.Control>
+                                   <Form.Control
+                                        ref={titleRef}
+                                        required
+                                   ></Form.Control>
                               </Form.Group>
                          </Col>
                          <Col>
@@ -23,6 +32,7 @@ export default function NoteForm() {
                          <Form.Group controlId="markdown">
                               <Form.Label>Title</Form.Label>
                               <Form.Control
+                                   ref={markdownRef}
                                    required
                                    as="textarea"
                                    rows={15}
