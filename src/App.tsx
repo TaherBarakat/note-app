@@ -47,12 +47,23 @@ export default function App() {
                { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
           ]);
      }
-
+     function addTag(tag: Tag) {
+          setTags((prev) => [...prev, tag]);
+     }
      return (
           <Container className="my-4">
                <Routes>
                     <Route path="/" element={<h1>home</h1>}></Route>
-                    <Route path="/new" element={<NewNote />}></Route>
+                    <Route
+                         path="/new"
+                         element={
+                              <NewNote
+                                   onSubmit={onCreateNote}
+                                   onAddTag={addTag}
+                                   availableTags={tags}
+                              />
+                         }
+                    ></Route>
                     <Route path="/:id">
                          <Route index element={<h1>show</h1>}></Route>
                          <Route path="edit" element={<h1>edit</h1>}></Route>
