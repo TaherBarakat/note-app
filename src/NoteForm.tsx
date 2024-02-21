@@ -9,16 +9,19 @@ type NoteFormProps = {
      onSubmit: (data: NoteData) => void;
      onAddTag: (tag: Tag) => void;
      availableTags: Tag[];
-};
+} & Partial<NoteData>;
 
 export default function NoteForm({
      onSubmit,
      onAddTag,
      availableTags,
+     title = "",
+     markdown = "",
+     tags = [],
 }: NoteFormProps) {
      const titleRef = useRef<HTMLInputElement>(null);
      const markdownRef = useRef<HTMLTextAreaElement>(null);
-     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+     const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
      const navigate = useNavigate();
      function handleSubmit(e: FormEvent) {
           e.preventDefault();
@@ -29,6 +32,7 @@ export default function NoteForm({
                tags: selectedTags,
           });
           navigate("..");
+          console.log("d");
      }
      return (
           <Form onSubmit={handleSubmit}>
@@ -40,6 +44,7 @@ export default function NoteForm({
                                    <Form.Control
                                         ref={titleRef}
                                         required
+                                        defaultValue={title}
                                    ></Form.Control>
                               </Form.Group>
                          </Col>
@@ -93,6 +98,7 @@ export default function NoteForm({
                                    required
                                    as="textarea"
                                    rows={15}
+                                   defaultValue={markdown}
                               ></Form.Control>
                          </Form.Group>
                     </Row>
@@ -101,7 +107,10 @@ export default function NoteForm({
                               Save
                          </Button>
                          <Link to="..">
-                              <Button type="submit" variant="outline-secondary">
+                              <Button
+                                   //  type="submit"
+                                   variant="outline-secondary"
+                              >
                                    Cancel
                               </Button>
                          </Link>
