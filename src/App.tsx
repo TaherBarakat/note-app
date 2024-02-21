@@ -56,7 +56,12 @@ export default function App() {
                <Routes>
                     <Route
                          path="/"
-                         element={<NoteList availableTags={tags} />}
+                         element={
+                              <NoteList
+                                   notes={notesWithTags}
+                                   availableTags={tags}
+                              />
+                         }
                     ></Route>
                     <Route
                          path="/new"
