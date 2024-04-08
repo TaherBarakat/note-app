@@ -102,7 +102,7 @@ export default function NoteForm({
                               ></Form.Control>
                          </Form.Group>
                     </Row>
-                    <Stack direction="horizontal" gap={2}>
+                    <Stack direction="horizontal" gap={2} className="mt-4">
                          <Button type="submit" variant="primary">
                               Save
                          </Button>
